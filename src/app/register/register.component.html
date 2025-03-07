@@ -1,0 +1,43 @@
+
+<div class="container">
+    <h1>Member Registration</h1>
+</div>
+
+<div class="form-group">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="input-group" *ngFor="let field of fields">
+            <label *ngIf="field.visible">{{ field.label }}<span *ngIf="field.required" style="color: red;">*</span></label>
+
+            <kendo-textbox
+                *ngIf="field.label !== 'Address' && field.visible"
+                id="{{ field.label }}"
+                formControlName="{{ field.label }}"
+            ></kendo-textbox>
+
+            <kendo-textarea
+                *ngIf="field.label === 'Address' && field.visible"
+                id="{{ field.label }}"
+                formControlName="{{ field.label }}" [rows]="4"  
+            ></kendo-textarea>
+
+            <small *ngIf="form.get(field.label)?.touched && form.get(field.label)?.invalid">
+                <span *ngIf="form.get(field.label)?.hasError('required')" class="error">
+                    {{ field.label }} is required.
+                </span>
+                <span *ngIf="form.get(field.label)?.hasError('email')" class="error">
+                    Please enter a valid email address.
+                </span>
+                <span *ngIf="form.get(field.label)?.hasError('pattern')" class="error">
+                    Enter a valid phone number.
+                </span>
+            </small>
+        </div>
+        <div class="button-group">
+            <button id="submit" kendoButton type="submit">Submit</button>
+        </div>
+    </form>
+</div>  
+
+
+
+  

@@ -1,0 +1,47 @@
+<div class="container">
+  <h1>Form Configuration</h1>
+</div>
+
+<div class="form-group">
+
+  <div #wrapper kendoDragTargetContainer kendoDropTargetContainer dragTargetFilter=".k-master-row"
+    dropTargetFilter=".k-master-row" [dragData]="dragData" [hint]="{ hintClass: 'rowHint' }" (onDrop)="onDrop($event)"
+    dragHandle="tr">
+    <kendo-grid [data]="fields" [height]="400">
+
+      <kendo-grid-column field="visible" title="Show Field" [width]="120">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <kendo-checkbox [(ngModel)]="dataItem.visible" [ngModelOptions]="{ standalone: true }"
+            (ngModelChange)="toggleVisibility(dataItem)"></kendo-checkbox>
+        </ng-template>
+      </kendo-grid-column>
+
+
+      <kendo-grid-column title="" [width]="40">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <div class="hint-wrapper">
+            <span class="drag-handle" [attr.data-kendo-grid-item-index]="fields.indexOf(dataItem)">
+              <i class="k-icon k-i-drag-and-drop"></i>
+            </span>
+          </div>
+        </ng-template>
+      </kendo-grid-column>
+
+
+      <kendo-grid-column field="label" title="" [width]="200"></kendo-grid-column>
+
+
+      <kendo-grid-column field="required" title="Required Field" [width]="120">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <kendo-checkbox [(ngModel)]="dataItem.required" [ngModelOptions]="{ standalone: true }"
+            [disabled]="!dataItem.visible"></kendo-checkbox>
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+  </div>
+
+
+  <div class="button-group">
+    <button id="submit" kendoButton (click)="saveConfiguration()">Save Changes</button>
+  </div>
+</div>

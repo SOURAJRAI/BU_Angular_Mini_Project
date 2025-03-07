@@ -1,0 +1,74 @@
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    font-size: 50px;
+  }
+  
+  .form-group {
+    justify-content: center;
+    margin: auto;
+    background-color: white;
+    height: auto;
+    border-radius: 7px;
+    width: 450px;
+    box-shadow: 0 2px 7px grey;
+  }
+  
+  .input-group {
+    display: flex;
+    margin: 10px;
+    border-radius: 10px;
+    padding-left: 10px;
+    border: 20px black;
+    padding: 10px;
+    justify-content: start;
+    margin-bottom: 2px;
+    width: 100%;
+  }
+  
+  label {
+    padding-left: 30px;
+    width: 1%;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  #submit {
+    background-color: black;
+    border-radius: 6px;
+    color: white;
+    padding: 8px;
+    align-items: center;
+    justify-items: center;
+  }
+  
+
+  ::ng-deep .k-grid-header{
+    background-color: black;
+    color: white;
+    font-size: 15px;
+    padding: 10px 15px 10px 0px !important;
+  }
+
+
+  ::ng-deep table.k-grid-table.k-table.k-table-md{
+    padding-top: 10px;
+  }
+  kendo-checkbox{
+    margin-left: 30px;
+    padding-top: 10px;
+
+  }
+  ::ng-deep td{
+    padding: 10px;
+  }
+
+
+  
+  
