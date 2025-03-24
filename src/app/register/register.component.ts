@@ -11,18 +11,30 @@ import { ToastrService } from 'ngx-toastr';
 export class RegisterComponent implements OnInit {
   form: FormGroup;
   fields: any[] = [];
+  countries:any[]=[];
+
+  selectedCountryObj: any = { code: '+91', flag: 'https://flagcdn.com/w320/in.png' }; // Default to India
+  showDropdown = false;
+  // searchCountry="";
+  filterCountries:any[]=[];
+
+
 
   constructor(
     private fb: FormBuilder,
-    private formConfigService: FormServiceService,
+    private service: FormServiceService,
     private toastr:ToastrService
   ) {
-    this.form = this.fb.group({});
+    this.form = this.fb.group({
+      country:['',Validators.required],
+      searchCountry:['']
+    });
   }
 
   ngOnInit(): void {
-    this.fields = this.formConfigService.getConfiguration();
+    this.fields = this.service.getConfiguration();
     this.createFormFields();
+    this.fetchCountryCodes();
   }
 
   createFormFields() {
@@ -58,4 +70,45 @@ export class RegisterComponent implements OnInit {
       this.toastr.error('Fill the form correctly');
     }
   }
+
+  fetchCountryCodes():void{
+    this.service.getAllCountries().subscribe((data)=>
+    {
+      this.countries=data.map((country)=>(
+      {
+        name:country.name.common,
+        code:country.idd?.root ? country.idd.root +(country.idd.suffixes ? country.idd.suffixes[0]: ''):'',
+        flag: country.flags.png,
+
+      }));
+      this.filterCountries=[...this.countries];
+    });
+  }
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+    if (this.showDropdown) {
+      this.form.get('searchCountry')?.setValue(''); 
+      // this.filterCountries = [...this.countries]; 
+    }
+  }
+
+  selectCountry(country: any) {
+    this.selectedCountryObj = country;
+    this.showDropdown = false;
+  }
+
+  FilterCountry(){
+    if(this.form.get('searchCountry'))
+    {
+      this.filterCountries=this.countries.filter((country)=>
+        country.name.toLowerCase().includes(this.form.get('searchCountry')?.value.toLowerCase()) || country.code.includes(this.form.get('searchCountry')?.value));
+    }
+    else{
+      this.filterCountries = this.countries;
+    }
+  }
+
+
+
+
 }

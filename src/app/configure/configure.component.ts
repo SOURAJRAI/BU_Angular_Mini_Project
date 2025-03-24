@@ -27,6 +27,7 @@ export class ConfigureComponent implements OnInit {
   ngOnInit(): void {
 
     this.fields=structuredClone(this.formConfigService.getConfiguration());
+    // this.fields=this.formConfigService.getConfiguration();
   
   }
   toggleVisibility(field: any): void {

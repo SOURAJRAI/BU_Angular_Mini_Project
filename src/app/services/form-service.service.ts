@@ -1,6 +1,8 @@
 
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Token } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, retry } from 'rxjs';
+import { BehaviorSubject, Observable, retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,9 @@ export class FormServiceService {
     { label: 'Address', visible: true, required: false }
   ];
 
-  constructor() {
+   private api=" https://restcountries.com/v3.1/all";
+
+  constructor(private http:HttpClient) {
     const savedControl = localStorage.getItem('formConfiguration');
 
     if (savedControl) {
@@ -25,6 +29,13 @@ export class FormServiceService {
 
   }
 
+  private users=[
+    {
+      username:'admin',
+      password:'Admin@123'
+    }
+  ]
+
 
   saveConfiguration(config: any[]) {
     this.fields = config;
@@ -35,4 +46,24 @@ export class FormServiceService {
     return this.fields;
   }
 
-}
+  Login(username:string,password:string){
+    const token='LoggedIn';
+    const users=this.users.find(u=>u.username.trim() == username.trim() && u.password.trim() == password.trim());
+    if(users){
+      localStorage.setItem('Token',token);
+      return true;
+    }
+    return false;
+  }
+
+  isLoggedIn(){
+    return localStorage.getItem('Token') != null;
+  }
+
+  getAllCountries():Observable<any[]>{
+    return this.http.get<any[]>(this.api);
+
+  }
+
+  }
+

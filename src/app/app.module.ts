@@ -11,7 +11,12 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { CheckBoxModule, InputsModule } from '@progress/kendo-angular-inputs';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DragTargetContainerDirective, DropTargetContainerDirective, DropTargetEvent } from '@progress/kendo-angular-utils';
+import { DragTargetContainerDirective,DropTargetContainerDirective } from '@progress/kendo-angular-utils';
+import { LoginComponent } from './login/login.component';
+import {HttpClientModule} from '@angular/common/http';
+import { from } from 'rxjs';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+
 
 
 
@@ -19,7 +24,8 @@ import { DragTargetContainerDirective, DropTargetContainerDirective, DropTargetE
   declarations: [
     AppComponent,
     ConfigureComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -27,8 +33,8 @@ import { DragTargetContainerDirective, DropTargetContainerDirective, DropTargetE
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
-    GridModule,
     CheckBoxModule,
+    HttpClientModule,
     InputsModule,
     DragTargetContainerDirective,
     DropTargetContainerDirective,
@@ -39,10 +45,9 @@ import { DragTargetContainerDirective, DropTargetContainerDirective, DropTargetE
         progressBar:true,
         progressAnimation:'decreasing'
       }),
-    BrowserAnimationsModule
-  
-
-    
+    BrowserAnimationsModule,
+    GridModule,
+    DropDownsModule
 
   ],
   providers: [],

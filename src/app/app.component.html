@@ -1,6 +1,10 @@
 <div class="navbar">
-  <button  routerLink="/register" [ngClass]="{'clicked':isRegisterPage}"  routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Register</button>
-  <button routerLink="/configure" [ngClass]="{'clicked':isConfigurePage}"  routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Configure</button>
+
+  <button  routerLink="/login"  routerLinkActive="active" *ngIf="!this.service.isLoggedIn()" >Login</button>
+  <button (click)="Logout()" *ngIf="service.isLoggedIn()">Logout</button>
+  <button  routerLink="/register"   routerLinkActive="active" >Register</button>
+  <button routerLink="/configure"   routerLinkActive="active" (click)="showMsg()">Configure</button>
 </div>
 
 <router-outlet></router-outlet>
++

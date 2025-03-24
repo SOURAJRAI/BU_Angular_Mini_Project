@@ -62,9 +62,9 @@ h1 {
   }
   kendo-checkbox{
     margin-left: 30px;
-    padding-top: 10px;
 
   }
+  
   ::ng-deep td{
     padding: 10px;
   }
