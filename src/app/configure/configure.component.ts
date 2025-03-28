@@ -15,13 +15,6 @@ import { DropTargetEvent } from '@progress/kendo-angular-utils';
 export class ConfigureComponent implements OnInit {
   fields: any[] = [];
 
-  @ViewChild('wrapper',{read:DragTargetContainerDirective})
-  public dragTargetContainer!: DropTargetContainerDirective;
-
-  @ViewChild('wrapper',{read:DropTargetContainerDirective})
-  public dropTargetContainer!: DropTargetContainerDirective;
-
-
   constructor(private formConfigService: FormServiceService,private toastr:ToastrService) {}
 
   ngOnInit(): void {
@@ -34,8 +27,25 @@ export class ConfigureComponent implements OnInit {
 
     if (!field.visible) {
       field.required = false; 
-    }      
+    }   
+    
+    if(field.label==='Address')
+      {
+        this.fields.forEach(f=>{
+          if(f.label==='State' || f.label==='City' || f.label === 'Pincode'){
+            f.visible=field.visible;
+          }
+        })
+      }
+  
+
     } 
+
+    isAddressFieldHidden() {
+      const addressField = this.fields.find(f => f.label === 'Address');
+      return !addressField.visible; // Disable if Address is hidden
+    }
+
 
   saveConfiguration(): void {
     
@@ -63,9 +73,6 @@ export class ConfigureComponent implements OnInit {
 
     this.updateFieldsData(fromIndex, destinationIndex);
 
-    
-    this.dragTargetContainer.notify();
-    this.dropTargetContainer.notify();
   }
 
   
@@ -82,13 +89,5 @@ export class ConfigureComponent implements OnInit {
  
 
   }
-
-
-
-
-
-
-
-
   
 }

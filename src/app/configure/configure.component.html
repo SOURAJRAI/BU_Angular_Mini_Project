@@ -12,7 +12,8 @@
       <kendo-grid-column field="visible" title="Show Field" [width]="120">
         <ng-template kendoGridCellTemplate let-dataItem>
           <kendo-checkbox [(ngModel)]="dataItem.visible" [ngModelOptions]="{ standalone: true }"
-            (ngModelChange)="toggleVisibility(dataItem)"></kendo-checkbox>
+            (ngModelChange)="toggleVisibility(dataItem)"
+            [disabled]="['City', 'State', 'Pincode'].includes(dataItem.label) &&  (isAddressFieldHidden())" ></kendo-checkbox>
         </ng-template>
       </kendo-grid-column>
 

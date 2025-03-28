@@ -12,7 +12,10 @@ export class FormServiceService {
     { label: 'Name', visible: true, required: true },
     { label: 'Mobile', visible: true, required: true },
     { label: 'Email', visible: true, required: true },
-    { label: 'Address', visible: true, required: false }
+    { label: 'Address', visible: true, required: false },
+    { label: 'City', visible: true, required: false },
+    { label: 'State', visible: true, required: false },
+    { label: 'Pincode', visible: true, required: false }
   ];
 
    private api=" https://restcountries.com/v3.1/all";
